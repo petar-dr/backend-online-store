@@ -3,16 +3,20 @@ const products = require("./products/products");
 const app = express();
 const port = process.env.SERVER_PORT || 5000;
 
+
+// get all product 
 app.get("/products", (req, res) => {
   const allProducts = products.getAllProducts();
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.status(200).json(allProducts);
 });
+// get the most popular products
 app.get("/products/popular", (req, res) => {
   const getMostPopular = products.getMostPopular();
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.status(200).json(getMostPopular);
 });
+// get product by id
 app.get("/products/:id", (req, res) => {
   const id = req.params.id;
   res.setHeader("Access-Control-Allow-Origin", "*");
