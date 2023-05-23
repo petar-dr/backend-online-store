@@ -232,19 +232,22 @@ const products = [
 ];
 
 const getAllProducts = () => {
-    return products;
+  return products;
 };
-const getProductById =(ID) =>{
-  const findProduct = products.filter((product)=>product.id==ID);  
-  return findProduct.length>0? findProduct[0]:null;
-
-}
+const getProductById = (ID) => {
+  const findProduct = products.filter((product) => product.id == ID);
+  return findProduct.length > 0 ? findProduct[0] : null;
+};
 const getMostPopular = () => {
-  let popular = products;
-  return popular.sort(function(a,b) {return b.soldItems - a.soldItems;}).slice(0,5);
-}
-module.exports ={
-    getAllProducts,
-    getProductById,
-    getMostPopular
-}
+  const popular = products;
+  return popular
+    .sort(function (a, b) {
+      return b.soldItems - a.soldItems;
+    })
+    .slice(0, 5);
+};
+module.exports = {
+  getAllProducts,
+  getProductById,
+  getMostPopular,
+};
