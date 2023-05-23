@@ -26,8 +26,10 @@ app.get("/products/:id",(req,res)=>{
         }
     }
 })
-
-
+app.get("/products/popular", (req,res)=>{
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.status(200).json(getMostPopular);
+})
 app.listen(port,()=>{
     console.log("Server connected")
 })

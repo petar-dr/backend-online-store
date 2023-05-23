@@ -5,6 +5,7 @@ const products = [
     category: "chairs",
     price: 220,
     inStock: 44,
+    soldItems: 50,
     discount: 10,
     new: false,
     img: {
@@ -27,6 +28,7 @@ const products = [
     category: "chairs",
     price: 1399,
     inStock: 1,
+    soldItems: 33,
     discount: 0,
     new: true,
     img: {
@@ -49,6 +51,7 @@ const products = [
     category: "chairs",
     price: 1199,
     inStock: 12,
+    soldItems: 44,
     discount: 10,
     new: false,
     img: {
@@ -71,6 +74,7 @@ const products = [
     category: "chairs",
     price: 1345,
     inStock: 28,
+    soldItems: 20,
     discount: 0,
     new: true,
     img: {
@@ -93,6 +97,7 @@ const products = [
     category: "chairs",
     price: 999,
     inStock: 33,
+    soldItems: 55,
     discount: 8,
     new: false,
     img: {
@@ -115,6 +120,7 @@ const products = [
     category: "sofas",
     price: 1200,
     inStock: 31,
+    soldItems: 15,
     discount: 10,
     new: false,
     img: {
@@ -137,6 +143,7 @@ const products = [
     category: "sofas",
     price: 1150,
     inStock: 20,
+    soldItems: 38,
     discount: 0,
     new: true,
     img: {
@@ -159,6 +166,7 @@ const products = [
     category: "sofas",
     price: 1550,
     inStock: 5,
+    soldItems: 60,
     discount: 0,
     new: false,
     img: {
@@ -181,6 +189,7 @@ const products = [
     category: "tables",
     price: 1650,
     inStock: 31,
+    soldItems: 54,
     discount: 10,
     new: true,
     img: {
@@ -203,6 +212,7 @@ const products = [
     category: "tables",
     price: 1350,
     inStock: 20,
+    soldItems: 62,
     discount: 10,
     new: false,
     img: {
@@ -229,7 +239,12 @@ const getProductById =(ID) =>{
   return findProduct.length>0? findProduct[0]:null;
 
 }
+const getMostPopular = () => {
+  let popular = products;
+  return popular.sort(function(a,b) {return b.soldItems - a.soldItems;}).slice(0,5);
+}
 module.exports ={
     getAllProducts,
-    getProductById
+    getProductById,
+    getMostPopular
 }
