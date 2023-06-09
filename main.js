@@ -36,7 +36,7 @@ app.get("/products/popular", (req, res) => {
   res.status(200).json(getMostPopular);
 });
 // get product by id
-app.get("/products/:id", (req, res) => {
+app.get("/product/:id", (req, res) => {
   const id = req.params.id;
   res.setHeader("Access-Control-Allow-Origin", "*");
   if (id == undefined) {
