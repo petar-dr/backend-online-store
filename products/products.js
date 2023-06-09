@@ -234,6 +234,11 @@ const products = [
 const getAllProducts = () => {
   return products;
 };
+const getChairs = () => {
+  const findProduct = products.filter((product) => product.category == "chairs");
+  return findProduct.length > 0 ? findProduct : null;
+};
+
 const getProductById = (ID) => {
   const findProduct = products.filter((product) => product.id == ID);
   return findProduct.length > 0 ? findProduct[0] : null;
@@ -248,6 +253,7 @@ const getMostPopular = () => {
 };
 module.exports = {
   getAllProducts,
+  getChairs,
   getProductById,
   getMostPopular,
 };

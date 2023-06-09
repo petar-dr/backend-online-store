@@ -10,6 +10,12 @@ app.get("/products", (req, res) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.status(200).json(allProducts);
 });
+// get all chairs
+app.get("/products/chairs", (req, res) => {
+  const getChairs = products.getChairs();
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.status(200).json(getChairs);
+});
 // get top 5 popular products
 app.get("/products/popular", (req, res) => {
   const getMostPopular = products.getMostPopular();
