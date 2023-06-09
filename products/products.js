@@ -238,6 +238,15 @@ const getChairs = () => {
   const allChairs = products.filter((product) => product.category == "chairs");
   return allChairs.length > 0 ? allChairs : null;
 };
+const getTables = () => {
+  const allTables = products.filter((product) => product.category == "tables");
+  return allTables.length > 0 ? allTables : null;
+};
+const getSofas = () => {
+  const allSofas = products.filter((product) => product.category == "sofas");
+  return allSofas.length > 0 ? allSofas : null;
+};
+
 
 const getProductById = (ID) => {
   const findProduct = products.filter((product) => product.id == ID);
@@ -254,6 +263,8 @@ const getMostPopular = () => {
 module.exports = {
   getAllProducts,
   getChairs,
+  getTables,
+  getSofas,
   getProductById,
   getMostPopular,
 };
