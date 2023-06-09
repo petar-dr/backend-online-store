@@ -235,8 +235,8 @@ const getAllProducts = () => {
   return products;
 };
 const getChairs = () => {
-  const findProduct = products.filter((product) => product.category == "chairs");
-  return findProduct.length > 0 ? findProduct : null;
+  const allChairs = products.filter((product) => product.category == "chairs");
+  return allChairs.length > 0 ? allChairs : null;
 };
 
 const getProductById = (ID) => {
