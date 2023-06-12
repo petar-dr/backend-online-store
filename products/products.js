@@ -126,7 +126,7 @@ const products = [
     img: {
       img1: "../data/products/sofa/sofa1/sofa1_1.jpg",
       img2: "../data/products/sofa/sofa1/sofa1_2.jpg",
-      img3: "../data/products/sofa/sofa1/sofa1_3.jpg.jpg",
+      img3: "../data/products/sofa/sofa1/sofa1_3.jpg",
     },
     code: 777567,
     desc: "It is designed like a blank painting canvas, prepared to receive a personal touch, and the backrest in the form of an envelope is ready to hug the cushions of your choice.",

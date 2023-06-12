@@ -3,8 +3,7 @@ const products = require("./products/products");
 const app = express();
 const port = process.env.SERVER_PORT || 5000;
 
-
-// get all product 
+// get all product
 app.get("/products", (req, res) => {
   const allProducts = products.getAllProducts();
   res.setHeader("Access-Control-Allow-Origin", "*");
