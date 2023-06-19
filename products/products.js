@@ -234,6 +234,7 @@ const products = [
 const getAllProducts = () => {
   return products;
 };
+//categories
 const getChairs = () => {
   const allChairs = products.filter((product) => product.category == "chairs");
   return allChairs.length > 0 ? allChairs : null;
