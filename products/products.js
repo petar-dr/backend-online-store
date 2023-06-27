@@ -505,6 +505,29 @@ const products = [
     },
     hoverImg: "../data/products/table/table6/table6_hover.jpg",
   },
+  {
+    id: 23,
+    name: "Beatrice",
+    category: "chairs",
+    price: 680,
+    available: true,
+    soldItems: 6,
+    discount: 0,
+    new: false,
+    img: {
+      img1: "../data/products/chair/chair11/chair11_1.jpg",
+      img2: "../data/products/chair/chair11/chair11_2.jpg",
+      img3: "../data/products/chair/chair11/chair11_3.jpg",
+    },
+    code: 884209,
+    desc: "Experience pure comfort with the Beatrice Chair. Its sumptuous velvet upholstery and exquisite detailing create a standout piece for any room. Sink into opulent comfort and relax in style with this stunning chair",
+    dimensions: {
+      width: "76",
+      height: "92",
+      length: "68",
+    },
+    hoverImg: "../data/products/chair/chair11/chair11_hover.jpg",
+  },
 ];
 
 const getAllProducts = () => {
