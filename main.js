@@ -21,7 +21,7 @@ app.use(cors({
 }));
 app.use(bodyParser.json());
 //Sing up
-app.post("/registration", async (req, res) => {
+app.post("/singup", async (req, res) => {
   const { username, email, password: plainTextPassword } = req.body;
   // if (!username || typeof username !== "string") {
   //   return res.json({ status: 'error', error: "Invalid username" });
@@ -45,7 +45,25 @@ app.post("/registration", async (req, res) => {
   }
   res.json({ status: "ok" });
 })
-
+app.post("/login", async (req, res) => {
+  const { email, password } = req.body;
+  const user = await User.findOne({ email }).lean();
+  if (!user) {
+      return res.json({ status: "error", error: "Invalid email" })
+  }
+  if (await bcrypt.compare(password, user.password)) {
+      const token = jwt.sign(
+          {
+              id: user._id,
+              email: user.email
+          },
+          JWT_SECRET
+      )
+      return res.json({ status: "ok", token: token })
+  } else {
+      return res.json({ status: "error", error: "Invalid password" })
+  }
+})
 
 
 //API
@@ -62,7 +80,6 @@ app.get("/products/chairs", (req, res) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.status(200).json(getChairs);
 });
-
 // get tables
 app.get("/products/tables", (req, res) => {
   const getTables = products.getTables();
