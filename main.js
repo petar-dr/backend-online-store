@@ -1,7 +1,54 @@
 const express = require("express");
+const path = require("path");
+const bodyParser = require("body-parser");
+const cors = require("cors");
+const mongoose = require("mongoose");
+const jwt = require("jsonwebtoken");
+
+mongoose.connect('mongodb://127.0.0.1:27017/usersData', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
+const JWT_SECRET = 'nnknjbh';
+const User = require("./model/mongoShema");
+const bcrypt = require("bcrypt");
+
 const products = require("./products/products");
 const app = express();
-const port = process.env.SERVER_PORT || 5000;
+const port = 5000;
+app.use(cors({
+  origin: '*'
+}));
+app.use(bodyParser.json());
+//Sing up
+app.post("/registration", async (req, res) => {
+  const { username, email, password: plainTextPassword } = req.body;
+  // if (!username || typeof username !== "string") {
+  //   return res.json({ status: 'error', error: "Invalid username" });
+  // }
+  // if (!plainTextPassword || typeof plainTextPassword !== "string") {
+  //   return res.json({ status: 'error', error: "Invalid password" });
+  // }
+  // if (plainTextPassword.length < 5) {
+  //     return res.json({ status: "error", error: "Password is too small, use 6 characters" })
+  // }
+  const password = await bcrypt.hash(plainTextPassword, 10);
+
+  try {
+    const response = await User.create({ username, email, password });
+    console.log("User created successfully", response)
+  } catch (error) {
+    if (error.code === 11000) {
+      return res.json({ status: "error", error: "Username in use!" })
+    }
+    throw error;
+  }
+  res.json({ status: "ok" });
+})
+
+
+
+//API
 
 // get all product
 app.get("/products", (req, res) => {
