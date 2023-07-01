@@ -528,6 +528,29 @@ const products = [
     },
     hoverImg: "../data/products/chair/chair11/chair11_hover.jpg",
   },
+  {
+    id: 24,
+    name: "Clasic",
+    category: "chairs",
+    price: 300,
+    available: true,
+    soldItems: 20,
+    discount: 0,
+    new: false,
+    img: {
+      img1: "../data/products/chair/chair12/chair12_1.jpg",
+      img2: "../data/products/chair/chair12/chair12_2.jpg",
+      img3: "../data/products/chair/chair12/chair12_3.jpg",
+    },
+    code: 666559,
+    desc: "The chair is made of oak, its design is permeated by fluid, organic forms, combining strong curves with exceptional lightness. As a result, we got a minimalist design that optimizes comfort and is focused on man and his movements, without lacking aesthetics and characteristic details.",
+    dimensions: {
+      width: "62",
+      height: "80",
+      length: "39",
+    },
+    hoverImg: "../data/products/chair/chair12/chair12_hover.jpg",
+  },
 ];
 
 const getAllProducts = () => {
