@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
+const auth = require("./jwt/authentication");
 
 mongoose.connect('mongodb://127.0.0.1:27017/usersData', {
   useNewUrlParser: true,
@@ -16,22 +17,26 @@ const bcrypt = require("bcrypt");
 const products = require("./products/products");
 const app = express();
 const port = 5000;
+
 app.use(cors({
   origin: '*'
 }));
 app.use(bodyParser.json());
+
+//USERS
+
 //Sing up
 app.post("/singup", async (req, res) => {
   const { username, email, password: plainTextPassword } = req.body;
-  // if (!username || typeof username !== "string") {
-  //   return res.json({ status: 'error', error: "Invalid username" });
-  // }
-  // if (!plainTextPassword || typeof plainTextPassword !== "string") {
-  //   return res.json({ status: 'error', error: "Invalid password" });
-  // }
-  // if (plainTextPassword.length < 5) {
-  //     return res.json({ status: "error", error: "Password is too small, use 6 characters" })
-  // }
+  if (!username || typeof username !== "string") {
+    return res.json({ status: 'error', error: "Invalid username" });
+  }
+  if (!plainTextPassword || typeof plainTextPassword !== "string") {
+    return res.json({ status: 'error', error: "Invalid password" });
+  }
+  if (plainTextPassword.length < 6) {
+    return res.json({ status: "error", error: "Password is too small, use 6 characters" })
+  }
   const password = await bcrypt.hash(plainTextPassword, 10);
 
   try {
@@ -45,25 +50,48 @@ app.post("/singup", async (req, res) => {
   }
   res.json({ status: "ok" });
 })
+//Log in
 app.post("/login", async (req, res) => {
-  const { email, password } = req.body;
-  const user = await User.findOne({ email }).lean();
+  const { username, password } = req.body;
+  const user = await User.findOne({ username }).lean();
   if (!user) {
-      return res.json({ status: "error", error: "Invalid email" })
+    return res.json({ status: "error", error: "Invalid username" })
   }
   if (await bcrypt.compare(password, user.password)) {
-      const token = jwt.sign(
-          {
-              id: user._id,
-              email: user.email
-          },
-          JWT_SECRET
-      )
-      return res.json({ status: "ok", token: token })
+    const token = jwt.sign(
+      {
+        id: user._id,
+        username: user.username
+      },
+      JWT_SECRET
+    )
+    return res.json({ status: "ok", username: username, token: token })
   } else {
-      return res.json({ status: "error", error: "Invalid password" })
+    return res.json({ status: "error", error: "Invalid password" })
   }
 })
+
+app.get("/user/:username", auth, async (req, res) => {
+  const username = req.params.username;
+  if (!username || typeof username !== "string") {
+    res.status(400).json({ error: "Invalid username" });
+  }
+  try {
+    const user = await User.findOne({ username }).lean();
+    if (!user) {
+      res.status(204).json({ error: "User no exist" });
+    } else {
+      console.log(user)
+
+      res.status(200).json(user);
+    }
+  } catch (error) {
+    res.status(404).json({ error: "User no found" });
+  }
+
+})
+
+
 
 
 //API
