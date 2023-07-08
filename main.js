@@ -41,14 +41,15 @@ app.post("/singup", async (req, res) => {
 
   try {
     const response = await User.create({ username, email, password });
-    console.log("User created successfully", response)
+
+    return res.json({ status: 200, message: "Successful created account" });
+
   } catch (error) {
     if (error.code === 11000) {
       return res.json({ status: "error", error: "Username in use!" })
     }
     throw error;
   }
-  res.json({ status: "ok" });
 })
 //Log in
 app.post("/login", async (req, res) => {
@@ -65,7 +66,8 @@ app.post("/login", async (req, res) => {
       },
       JWT_SECRET
     )
-    return res.json({ status: "ok", username: username, token: token })
+
+    return res.json({ status: 200, user: user, token: token, message: "Successful login" });
   } else {
     return res.json({ status: "error", error: "Invalid password" })
   }
@@ -81,7 +83,6 @@ app.get("/user/:username", auth, async (req, res) => {
     if (!user) {
       res.status(204).json({ error: "User no exist" });
     } else {
-      console.log(user)
 
       res.status(200).json(user);
     }
@@ -90,7 +91,19 @@ app.get("/user/:username", auth, async (req, res) => {
   }
 
 })
+app.put("/setwishlist", async (req, res) => {
+  const { userId, likeList } = req.body;
+  try {
 
+    await User.findByIdAndUpdate(userId, { $set: { wishList: likeList } }, { new: true })
+
+    return res.json({ status: 200, message: "Successful update" },);
+  }
+  catch (err) {
+    res.json(err)
+  }
+
+})
 
 
 
