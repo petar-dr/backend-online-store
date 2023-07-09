@@ -1,5 +1,4 @@
 const express = require("express");
-const path = require("path");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const mongoose = require("mongoose");
@@ -107,8 +106,7 @@ app.put("/setwishlist", async (req, res) => {
 
 
 
-//API
-
+//API end points
 // get all product
 app.get("/products", (req, res) => {
   const allProducts = products.getAllProducts();
