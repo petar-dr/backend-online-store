@@ -9,7 +9,7 @@ Features
 - API endpoints: Implement a range of API endpoints to manage the products for an online shop.
 - Secure authentication: Implement secure authentication mechanisms to protect user data
 
-Technologies Used
+Technologies used
 - Node.js: A JavaScript runtime environment for executing server-side code.
 - Express.js: A fast and minimalist web application framework for Node.js.
 - MongoDB: A popular NoSQL database for storing and retrieving data efficiently.
