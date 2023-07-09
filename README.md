@@ -7,10 +7,7 @@ The "Backend-online-store" is a Node.js application that serves as the backend f
 Features
 - User registration: Allow users to create accounts and securely store their information.
 - API endpoints: Implement a range of API endpoints to manage the products for an online shop.
-- Secure authentication: Implement secure authentication mechanisms to protect user data.
-- Scalability: Design the app with scalability in mind to handle a growing user base and increasing demands.
-- Error handling: Implement proper error handling to ensure smooth operation and user-friendly responses.
-
+- Secure authentication: Implement secure authentication mechanisms to protect user data
 
 Technologies Used
 - Node.js: A JavaScript runtime environment for executing server-side code.
